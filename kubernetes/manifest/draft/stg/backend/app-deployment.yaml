@@ -18,3 +18,12 @@ spec:
         image: yoshi429/draft-backend:v-0.0.1
         ports:
         - containerPort: 8000
+        volumeMounts:
+          - mountPath: /usr/src/app/configs.yaml
+            name: configs-yaml
+            readOnly: true
+            subPath: configs.yaml
+      volumes:
+          - name: configs-yaml
+            configMap:
+              name: backend-app-configs
