@@ -6,6 +6,8 @@ spec:
   selector:
     app: backend-app
   ports:
-  - protocol: TCP
+  - name: api-v1
     port: 8000
+    protocol: TCP
+    targetPort: 8000
   type: LoadBalancer
