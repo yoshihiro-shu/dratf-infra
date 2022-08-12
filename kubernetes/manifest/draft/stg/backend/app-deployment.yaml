@@ -7,14 +7,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: backend
+      app: backend-app
   template:
     metadata:
       labels:
-        app: backend
+        app: backend-app
     spec:
       containers:
-      - name: backend
+      - name: app
         image: yoshi429/draft-backend:v-0.0.1
         ports:
         - containerPort: 8000
