@@ -10,8 +10,8 @@ data:
 
     db:
       driver: "postgres"
-      host: "0.0.0.0"
-      # host: "draft-postgres"
+      # host: "127.0.0.1"
+      host: "backend-db"
       port: "5432"
       user: "postgres"
       name: "postgres"
@@ -20,7 +20,7 @@ data:
 
     cacheRedis:
       # host: "draft-redis"
-      host: "0.0.0.0"
+      host: "127.0.0.1"
       port: "6379"
       password: ""
       dbNumber: 0
