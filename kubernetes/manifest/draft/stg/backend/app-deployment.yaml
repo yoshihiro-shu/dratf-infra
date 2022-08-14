@@ -15,9 +15,10 @@ spec:
     spec:
       containers:
       - name: app
-        image: yoshi429/draft-backend:v-0.0.1
+        image: yoshi429/draft-backend:v-0.0.2
         ports:
         - containerPort: 8000
+        resources:
         volumeMounts:
           - mountPath: /usr/src/app/configs.yaml
             name: configs-yaml
