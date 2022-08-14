@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-cache
+  labels:
+    app: backend-cache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-cache
+  template:
+    metadata:
+      labels:
+        app: backend-cache
+    spec:
+      containers:
+      - name: backend-cache
+        image: redis:7.0.4
+        ports:
+        - containerPort: 6379
+        # TODO　ちゃんと設定する
+        resources:
