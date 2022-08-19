@@ -16,11 +16,11 @@ data:
         }
 
         location /api/ {
-          proxy_pass http://backend-app:8000/;
+          proxy_pass http://userapi/;
           proxy_set_header Host $http_host;
         }
     }
   upstream.conf: |
-    # upstream  userapi {
-    #   server  backend-app:8000;
-    # }
+    upstream  userapi {
+      server  backend-app:8000;
+    }
