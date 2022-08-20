@@ -7,7 +7,7 @@ metadata:
     {{- include "draft-backend.labels" . | nindent 4 }}
 spec:
   selector:
-    app: backend-app
+    {{- include "draft-backend.appSelectorLabels" . | nindent 4 }}
   ports:
   - name: api-v1
     port: 8000
