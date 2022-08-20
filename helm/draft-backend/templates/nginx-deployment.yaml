@@ -38,4 +38,4 @@ spec:
       volumes:
       - name: nginx-conf
         configMap:
-          name: backend-app-nginx-conf
+          name: {{ include "draft-backend.fullname" . }}-nginx-conf

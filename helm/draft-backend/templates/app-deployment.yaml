@@ -28,4 +28,4 @@ spec:
       volumes:
           - name: configs-yaml
             configMap:
-              name: backend-app-configs
+              name: {{ include "draft-backend.fullname" . }}-configs

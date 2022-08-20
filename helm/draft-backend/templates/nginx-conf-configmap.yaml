@@ -25,5 +25,5 @@ data:
     }
   upstream.conf: |
     upstream  userapi {
-      server  backend-app:8000;
+      server  {{ include "draft-backend.fullname" . }}-app:8000;
     }
