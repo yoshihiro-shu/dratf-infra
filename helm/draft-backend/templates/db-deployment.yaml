@@ -39,4 +39,4 @@ spec:
       volumes:
         - name: postgres-volume
           persistentVolumeClaim:
-            claimName: postgres-pv-claim
+            claimName: {{ include "draft-backend.fullname" . }}-claim

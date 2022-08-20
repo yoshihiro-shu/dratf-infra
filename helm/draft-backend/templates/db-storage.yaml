@@ -1,11 +1,10 @@
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: postgres-pv-volume
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "draft-backend.fullname" . }}-db-volume
+  # namespace: {{ .Release.Namespace }}
   labels:
-    type: local
-    app: postgres
+    {{- include "draft-backend.labels" . | nindent 4 }}
 spec:
   storageClassName: manual
   capacity:
@@ -18,10 +17,10 @@ spec:
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pv-claim
-  namespace: {{ .Release.Namespace }}
+  name: {{ include "draft-backend.fullname" . }}-claim
+  # namespace: {{ .Release.Namespace }}
   labels:
-    app: postgres
+    {{- include "draft-backend.labels" . | nindent 4 }}
 spec:
   storageClassName: manual
   accessModes:
