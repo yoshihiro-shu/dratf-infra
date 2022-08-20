@@ -9,11 +9,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      {{- include "draft-backend.dbSelectorLabels" . | nindent 4 }}
+      {{- include "draft-backend.dbSelectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-      {{- include "draft-backend.dbSelectorLabels" . | nindent 6 }}
+        {{- include "draft-backend.dbSelectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: {{ include "draft-backend.dbContainerName" . }}

@@ -5,3 +5,5 @@ psql -h localhost -p 5432 -U postgres -d postgres
 cd helm
 
 `helm install ./draft-backend  --generate-name`
+
+helm template x . --debug | kubectl apply --dry-run -f -

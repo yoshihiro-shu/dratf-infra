@@ -107,5 +107,5 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 Container Name for gateway
 */}}
 {{- define "draft-backend.gatewayContainerName" -}}
-nginx
+gateway
 {{- end }}
