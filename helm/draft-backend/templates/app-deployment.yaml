@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "draft-backend.fullname" . }}-app
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "draft-backend.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "draft-backend.appSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "draft-backend.appSelectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ include "draft-backend.appContainerName" . }}
+        image: yoshi429/draft-backend:v-0.0.2
+        ports:
+        - containerPort: 8000
+        resources:
+        volumeMounts:
+          - mountPath: /usr/src/app/configs.yaml
+            name: configs-yaml
+            readOnly: true
+            subPath: configs.yaml
+      volumes:
+          - name: configs-yaml
+            configMap:
+              name: backend-app-configs

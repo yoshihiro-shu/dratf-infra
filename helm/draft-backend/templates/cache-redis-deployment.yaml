@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "draft-backend.fullname" . }}-cache
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "draft-backend.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "draft-backend.cacheSelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "draft-backend.cacheSelectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ include "draft-backend.cacheContainerName" . }}
+        image: redis:7.0.4
+        ports:
+        - containerPort: 6379
+        # TODO　ちゃんと設定する
+        resources:

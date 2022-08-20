@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "draft-backend.fullname" . }}-gateway
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "draft-backend.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "draft-backend.gatewaySelectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "draft-backend.gatewaySelectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ include "draft-backend.gatewayContainerName" . }}
+        image: nginx:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+          - mountPath: /etc/nginx/conf.d/default.conf
+            name: nginx-conf
+            readOnly: true
+            subPath: default.conf          
+          - mountPath: /etc/nginx/conf.d/upstream.conf
+            name: nginx-conf
+            readOnly: true
+            subPath: upstream.conf
+      volumes:
+      - name: nginx-conf
+        configMap:
+          name: backend-app-nginx-conf

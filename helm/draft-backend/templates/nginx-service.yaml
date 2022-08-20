@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "draft-backend.fullname" . }}-nginx-app
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "draft-backend.labels" . | nindent 4 }}
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+  type: LoadBalancer

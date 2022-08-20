@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "draft-backend.fullname" . }}-db
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "draft-backend.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "draft-backend.dbSelectorLabels" . | nindent 4 }}
+  template:
+    metadata:
+      labels:
+      {{- include "draft-backend.dbSelectorLabels" . | nindent 6 }}
+    spec:
+      containers:
+      - name: {{ include "draft-backend.dbContainerName" . }}
+        image: postgres:14.4
+        env:
+          - name: POSTGRES_PASSWORD
+            value: "password"
+          - name: TZ
+            value: "Asia/Tokyo"
+        ports:
+        - containerPort: 5432
+        # TODO　ちゃんと設定する
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-volume
+      volumes:
+        - name: postgres-volume
+          persistentVolumeClaim:
+            claimName: postgres-pv-claim
