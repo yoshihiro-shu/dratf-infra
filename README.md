@@ -1,4 +1,4 @@
-## Backendの構成
+## Backendの構成（Kubernetes）
 
 [diagram](https://app.diagrams.net/?src=about#G1CuJWLpUqeXx_Qj7RZWCZc-ojCXzTaIJ_)
 
